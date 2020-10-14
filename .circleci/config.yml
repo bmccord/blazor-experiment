@@ -1,0 +1,17 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@0.5.13
+  
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - run_tests
+      - docker/publish:
+          image: bkmccord/$CIRCLE_PROJECT_REPONAME
+          dockerfile: Dockerfile
+          filters:
+            branches:
+              only: 
+                - master
